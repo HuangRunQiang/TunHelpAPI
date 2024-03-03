@@ -21,6 +21,23 @@
  *  distribution); if not, write to the Free Software Foundation, Inc.,
  *  59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+ /*
+ *  TAP-Windows -- 一个在Windows上提供虚拟tap设备功能的内核驱动程序。
+ *
+ *  该代码受到Damion K. Wilson的CIPE-Win32驱动程序的启发。
+ *
+ *  此源代码版权所有 (C) 2002-2010 OpenVPN Technologies, Inc.，
+ *  并在 GPL 第2版下发布（见下文）。
+ *
+ *  本程序是自由软件；您可以根据 GNU 通用公共许可证第2版的条款重新发布和/或修改它。
+ *
+ *  本程序的分发希望它是有用的，但没有任何担保；甚至没有适销性或特定目的的隐含担保。
+ *  更多详细信息请参阅 GNU 通用公共许可证。
+ *
+ *  您应该已经收到了 GNU 通用公共许可证的副本
+ *  与本程序一起（请参阅本分发附带的 COPYING 文件）；如果没有，请写信给
+ *  自由软件基金会，地址：59 Temple Place, Suite 330, Boston, MA  02111-1307  美国
+ */
 #ifndef __TAP_WIN_H
 #define __TAP_WIN_H
 

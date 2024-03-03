@@ -1,40 +1,33 @@
 ========================================================================
-    CONSOLE APPLICATION : TunHelperAPITest Project Overview
+    控制台应用程序：TunHelperAPITest 项目概述
 ========================================================================
 
-AppWizard has created this TunHelperAPITest application for you.
+AppWizard 已为您创建了这个 TunHelperAPITest 应用程序。
 
-This file contains a summary of what you will find in each of the files that
-make up your TunHelperAPITest application.
+本文件包含了构成 TunHelperAPITest 应用程序的每个文件中的内容摘要。
 
 
 TunHelperAPITest.vcxproj
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
+    这是使用应用程序向导生成的 VC++ 项目的主项目文件。
+    它包含了生成该文件的 Visual C++ 版本信息，以及使用应用程序向导选择的平台、配置和项目特性的信息。
 
 TunHelperAPITest.vcxproj.filters
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
+    这是使用应用程序向导生成的 VC++ 项目的筛选器文件。
+    它包含了项目中文件与筛选器之间的关联信息。
+    这种关联在 IDE 中用于显示具有相似扩展名的文件在特定节点下的分组（例如，".cpp" 文件与"Source Files"筛选器关联）。
 
 TunHelperAPITest.cpp
-    This is the main application source file.
+    这是主应用程序源文件。
 
 /////////////////////////////////////////////////////////////////////////////
-Other standard files:
+其他标准文件:
 
 StdAfx.h, StdAfx.cpp
-    These files are used to build a precompiled header (PCH) file
-    named TunHelperAPITest.pch and a precompiled types file named StdAfx.obj.
+    这些文件用于构建一个预编译头文件（PCH）文件，名为 TunHelperAPITest.pch，以及一个预编译类型文件，名为 StdAfx.obj。
 
 /////////////////////////////////////////////////////////////////////////////
-Other notes:
+其他说明:
 
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
+AppWizard 使用 "TODO:" 注释来指示您应添加或自定义源代码的部分。
 
 /////////////////////////////////////////////////////////////////////////////

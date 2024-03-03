@@ -1,4 +1,4 @@
-// TunHelperAPI.cpp : Defines the exported functions for the DLL application.
+ï»¿// TunHelperAPI.cpp : Defines the exported functions for the DLL application.
 //
 
 #include "stdafx.h"
@@ -51,7 +51,7 @@ TunDeviceInfo g_DeviceInfo = {};
 	int  GMTunfd
 #endif
 
-//´ò¿ªÉè±¸£¬ÉèÖÃÎªTUNÄ£Ê½£¬¼¤»îÍø¿¨
+//æ‰“å¼€è®¾å¤‡ï¼Œè®¾ç½®ä¸ºTUNæ¨¡å¼ï¼Œæ¿€æ´»ç½‘å¡
 void* OpenTun(const char *ip, const char *mask, const char *dhcpservice)
 {
 #ifdef _WIN32
@@ -71,7 +71,7 @@ void* OpenTun(const char *ip, const char *mask, const char *dhcpservice)
 
 	//Log(LOG_ERROR, "debug: device name = %s\n", DeviceName);
 
-	//´ò¿ªÉè±¸
+	//æ‰“å¼€è®¾å¤‡
 	g_DeviceInfo.fd = CreateFileA(DeviceName, GENERIC_READ | GENERIC_WRITE, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_SYSTEM|FILE_FLAG_OVERLAPPED, 0);
 	//g_DeviceInfo.fd = CreateFileA(DeviceName, GENERIC_READ | GENERIC_WRITE, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_SYSTEM, 0);
 	if (g_DeviceInfo.fd == INVALID_HANDLE_VALUE)
@@ -83,13 +83,13 @@ void* OpenTun(const char *ip, const char *mask, const char *dhcpservice)
 
 	DWORD len = 0;
 
-	//ep±£´ætunÍø¿¨µÄIPµØÖ·ºÍÑÚÂë
+	//epä¿å­˜tunç½‘å¡çš„IPåœ°å€å’Œæ©ç 
 	ULONG ep[3] = {};
 	ep[0] = inet_addr(ip);
 	ep[2] = inet_addr(mask);
 	ep[1] = ep[0] & ep[2];
 
-	//ÉèÖÃÎª Tun Ä£Ê½
+	//è®¾ç½®ä¸º Tun æ¨¡å¼
 	if(!DeviceIoControl(g_DeviceInfo.fd, TAP_WIN_IOCTL_CONFIG_TUN, ep, sizeof(ep), ep, sizeof ep, &len, NULL))
 	{
 		//Log(LOG_ERROR, "SET TUN ERR IP = %s mask = %s\n", ip, mask);
@@ -102,7 +102,7 @@ void* OpenTun(const char *ip, const char *mask, const char *dhcpservice)
 		//DoDebug("SET TUN success IP = %s mask = %s\n", ip, mask);
 	}
 
-	//Í¨¹ıDHCPÉèÖÃĞéÄâÍø¿¨IPµØÖ·
+	//é€šè¿‡DHCPè®¾ç½®è™šæ‹Ÿç½‘å¡IPåœ°å€
 	if(!ConfigDHCP(ip, mask, dhcpservice))
 	{
 		//Log(LOG_ERROR, "ConfigDHCP error\n");
@@ -113,11 +113,11 @@ void* OpenTun(const char *ip, const char *mask, const char *dhcpservice)
 
 	//AddTunIpaddr(ip, mask);
 
-	//ÉèÖÃÍø¿¨Æô¶¯×´Ì¬
+	//è®¾ç½®ç½‘å¡å¯åŠ¨çŠ¶æ€
 	ULONG MediaStatus = TRUE;
 	if(!DeviceIoControl(g_DeviceInfo.fd, TAP_WIN_IOCTL_SET_MEDIA_STATUS, &MediaStatus, sizeof(MediaStatus), &MediaStatus, sizeof(MediaStatus), &len, NULL))
 	{
-		//Íø¿¨Æô¶¯³ö´í
+		//ç½‘å¡å¯åŠ¨å‡ºé”™
 		//Log(LOG_ERROR, "TUN STATUS ERR\n");
 		CloseHandle(g_DeviceInfo.fd);
 		g_DeviceInfo.fd = NULL;
@@ -140,7 +140,7 @@ void* OpenTun(const char *ip, const char *mask, const char *dhcpservice)
 	if ((GMTunfd = open("/dev/net/tun", O_RDWR)) < 0)  
     {  
         //printf("Error :%m/n", errno);  
-        //´ò¿ªtunÉè±¸³ö´í
+        //æ‰“å¼€tunè®¾å¤‡å‡ºé”™
 		return NULL;
     }  
 	
@@ -177,13 +177,13 @@ void* OpenTun(const char *ip, const char *mask, const char *dhcpservice)
 	
 	if(ioctl(s, SIOCSIFFLAGS, &ifr) < 0)  
     {  
-       //¼¤»îtun³ö´í
+       //æ¿€æ´»tunå‡ºé”™
 		close(GMTunfd);
 		return NULL;
     }  
 	
-	//Ìí¼ÓIP
-	AddTunIpaddr(ip, mask)£»
+	//æ·»åŠ IP
+	AddTunIpaddr(ip, mask)ï¼›
 
 	return (void *)(&GMTunfd);
 
@@ -236,7 +236,7 @@ void CloseTun(void **pHandle)
 	*pHandle = NULL;
 }
 
-//Ìí¼ÓIPµØÖ·
+//æ·»åŠ IPåœ°å€
 int AddTunIpaddr(const char *ip, const char *mask)
 {
 #ifdef _WIN32
@@ -250,7 +250,7 @@ int AddTunIpaddr(const char *ip, const char *mask)
 	if(Index >= 0)
 	{
 		DWORD dwRet;
-		dwRet = AddIPAddress(IPAddress, IPMask, Index, &NTEContext, &NTEInstance);   //windows help api Ìí¼ÓIP
+		dwRet = AddIPAddress(IPAddress, IPMask, Index, &NTEContext, &NTEInstance);   //windows help api æ·»åŠ IP
 		if(NO_ERROR == dwRet || ERROR_OBJECT_ALREADY_EXISTS == dwRet)
 		{
 			return 0;
@@ -260,7 +260,7 @@ int AddTunIpaddr(const char *ip, const char *mask)
 			return -1;
 		}
 	}
-	return -1; //»ñÈ¡indexÎŞĞ§
+	return -1; //è·å–indexæ— æ•ˆ
 #else
 	// linux add ip
 	int s;
@@ -294,7 +294,7 @@ int AddTunIpaddr(const char *ip, const char *mask)
 #endif
 }
 
-//Ìí¼ÓÂ·ÓÉ
+//æ·»åŠ è·¯ç”±
 int AddTunRoute(const char *ip, const char *mask, const char *gateway)
 {
 
@@ -309,13 +309,13 @@ int AddTunRoute(const char *ip, const char *mask, const char *gateway)
 
 	DWORD Metric1 = GetMetric1(Index);
 
-	//Ìî³ä MIB_IPFORWARDROW ĞÅÏ¢
+	//å¡«å…… MIB_IPFORWARDROW ä¿¡æ¯
 	MIB_IPFORWARDROW fr = {};
 	fr.dwForwardDest = inet_addr(ip);
 	fr.dwForwardMask = inet_addr(mask);
 	fr.dwForwardNextHop = inet_addr(gateway);
 	fr.dwForwardPolicy = 0;
-	fr.dwForwardIfIndex = Index;  //dwForwardIfIndexÖµÒª >= Íø¿¨IndexÖµ
+	fr.dwForwardIfIndex = Index;  //dwForwardIfIndexå€¼è¦ >= ç½‘å¡Indexå€¼
 	fr.dwForwardType = 4;  /* the next hop is not the final dest */
 	fr.dwForwardProto = 3; /* PROTO_IP_NETMGMT */
 	fr.dwForwardAge = 0;
@@ -334,7 +334,7 @@ int AddTunRoute(const char *ip, const char *mask, const char *gateway)
 	}
 	else 
 	{
-		//Èç¹ûGetMetric1()Ã»ÓĞµÃµ½ÕıÈ·µÄMetric1Öµ£¬²ÉÓÃ±éÀúµÄ·½·¨»ñÈ¡Metric1
+		//å¦‚æœGetMetric1()æ²¡æœ‰å¾—åˆ°æ­£ç¡®çš„Metric1å€¼ï¼Œé‡‡ç”¨éå†çš„æ–¹æ³•è·å–Metric1
 		//MyFormatMessage(dwStatus);
 		for(Metric1 = 0; Metric1 < 9999; Metric1++)
 		{
@@ -390,7 +390,7 @@ int AddTunRoute(const char *ip, const char *mask, const char *gateway)
 #endif
 }
 
-//É¾³ıÂ·ÓÉ
+//åˆ é™¤è·¯ç”±
 int DelTunRoute(const char *ip, const char *mask, const char *gateway)
 {
 
@@ -425,12 +425,12 @@ int DelTunRoute(const char *ip, const char *mask, const char *gateway)
 
 #else
 	// linux del route
-	//linux ¹Ø±ÕĞéÄâÍø¿¨ Â·ÓÉ×Ô¶¯É¾³ı
+	//linux å…³é—­è™šæ‹Ÿç½‘å¡ è·¯ç”±è‡ªåŠ¨åˆ é™¤
 #endif
 
 }
 
-//É¾³ıtunÍø¿¨µÄËùÓĞÂ·ÓÉ
+//åˆ é™¤tunç½‘å¡çš„æ‰€æœ‰è·¯ç”±
 #ifdef _WIN32
 int DelTunRouteAll()
 {
@@ -480,7 +480,7 @@ BOOL ConfigDHCP(const char *ip, const char *mask, const char *DHCPServer)
 	DhcpConfig[0] = inet_addr(ip);
 	DhcpConfig[1] = inet_addr(mask);
 	DhcpConfig[2] = inet_addr(DHCPServer);
-	DhcpConfig[3] = 50000; // ×âÔ¼£¬Ãë
+	DhcpConfig[3] = 50000; // ç§Ÿçº¦ï¼Œç§’
 
 	BOOL Success = DeviceIoControl (g_DeviceInfo.fd, TAP_WIN_IOCTL_CONFIG_DHCP_MASQ,
 			DhcpConfig, sizeof DhcpConfig,
@@ -536,13 +536,13 @@ BOOL ConfigTun()
 		pAdapter = NULL;
 	}
 
-	//ep±£´ætunÍø¿¨µÄIPµØÖ·ºÍÑÚÂë
+	//epä¿å­˜tunç½‘å¡çš„IPåœ°å€å’Œæ©ç 
 	ULONG ep[3] = {};
 	ep[0] = ip.S_un.S_addr;
 	ep[2] = mask.S_un.S_addr;
 	ep[1] = ep[0] & ep[2];
 
-	//ÉèÖÃÎª Tun Ä£Ê½
+	//è®¾ç½®ä¸º Tun æ¨¡å¼
 	DWORD len = 0;
 	if(!DeviceIoControl(g_DeviceInfo.fd, TAP_WIN_IOCTL_CONFIG_TUN, ep, sizeof(ep), ep, sizeof ep, &len, NULL))
 	{

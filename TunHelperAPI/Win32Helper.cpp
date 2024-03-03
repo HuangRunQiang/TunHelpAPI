@@ -1,4 +1,4 @@
-#include <stdafx.h>
+ï»¿#include <stdafx.h>
 #include <stdlib.h>
 #include <WINSOCK2.h> 
 #include <shellapi.h>
@@ -18,7 +18,7 @@
 #pragma comment(lib, "Iphlpapi.lib")
 #pragma comment( lib, "Mprapi.lib" )
 
-//Í¨¹ıÊÊÅäÆ÷Ãû»ñÈ¡GUID
+//é€šè¿‡é€‚é…å™¨åè·å–GUID
 int GetAdapterGUID(const char *AdapterName, char *pBuf, int nLen)
 {
 	int nRet = -1;
@@ -26,7 +26,7 @@ int GetAdapterGUID(const char *AdapterName, char *pBuf, int nLen)
 	PIP_ADAPTER_INFO pAdapterInfo = NULL;
 	PIP_ADAPTER_INFO pAdapter = NULL;
 
-	//»ñÈ¡ÍøÂçÊÊÅäÆ÷ĞÅÏ¢
+	//è·å–ç½‘ç»œé€‚é…å™¨ä¿¡æ¯
 	if (GetAdaptersInfo(NULL, &ulOutBufLen) == ERROR_BUFFER_OVERFLOW)
 	{
 		pAdapterInfo = (PIP_ADAPTER_INFO)malloc(ulOutBufLen);
@@ -55,7 +55,7 @@ int GetAdapterGUID(const char *AdapterName, char *pBuf, int nLen)
 	return nRet;
 }
 
-//Í¨¹ıÊÊÅäÆ÷Ãû³Æ»ñÈ¡Index
+//é€šè¿‡é€‚é…å™¨åç§°è·å–Index
 int MyGetAdapterIndex(const char *AdapterName)
 {
 	int index = -1;
@@ -63,7 +63,7 @@ int MyGetAdapterIndex(const char *AdapterName)
 	PIP_ADAPTER_INFO pAdapterInfo = NULL;
 	PIP_ADAPTER_INFO pAdapter = NULL;
 
-	//»ñÈ¡ÍøÂçÊÊÅäÆ÷ĞÅÏ¢
+	//è·å–ç½‘ç»œé€‚é…å™¨ä¿¡æ¯
 	if (GetAdaptersInfo (NULL, &ulOutBufLen) == ERROR_BUFFER_OVERFLOW)
 	{
 		pAdapterInfo = (PIP_ADAPTER_INFO)malloc(ulOutBufLen);
@@ -89,14 +89,14 @@ int MyGetAdapterIndex(const char *AdapterName)
 	return index;
 }
 
-//Í¨¹ıIndex»ñÈ¡Metric1¡£Ìí¼ÓÂ·ÓÉÒªÓÃµ½Metric1
+//é€šè¿‡Indexè·å–Metric1ã€‚æ·»åŠ è·¯ç”±è¦ç”¨åˆ°Metric1
 unsigned long GetMetric1(int Index)
 {
 	PMIB_IPFORWARDTABLE pIpRouteTab = NULL;
 	ULONG dwActualSize = 0;
 	DWORD  Metric1 = -1;
 
-	//»ñÈ¡Â·ÓÉ±í
+	//è·å–è·¯ç”±è¡¨
 	if(GetIpForwardTable(pIpRouteTab, &dwActualSize, TRUE) == ERROR_INSUFFICIENT_BUFFER)
 	{
 		pIpRouteTab = (PMIB_IPFORWARDTABLE)malloc(dwActualSize);
@@ -121,7 +121,7 @@ unsigned long GetMetric1(int Index)
 	return Metric1;
 }
 
-//Çå¿ÕÊÊÅäÆ÷IP	²ÎÊı´«ÈëÎªNULL£¬½«²ÉÓÃ ADAPTER_NAME ºêËù¶¨ÒåµÄÊÊÅäÆ÷Ãû³Æ
+//æ¸…ç©ºé€‚é…å™¨IP	å‚æ•°ä¼ å…¥ä¸ºNULLï¼Œå°†é‡‡ç”¨ ADAPTER_NAME å®æ‰€å®šä¹‰çš„é€‚é…å™¨åç§°
 int ClearIP(const char* AdapterName)
 {
 	ULONG ulOutBufLen = 0;
@@ -169,7 +169,7 @@ int ClearIP(const char* AdapterName)
 	return 0;
 }
 
-//»ñÈ¡Íø¿¨ÊÊÅäÆ÷µÄÍøÂçÃû³Æ Èç¡°ÒÔÌ«Íø1¡±Ö®ÀàµÄÃû³Æ
+//è·å–ç½‘å¡é€‚é…å™¨çš„ç½‘ç»œåç§° å¦‚â€œä»¥å¤ªç½‘1â€ä¹‹ç±»çš„åç§°
 int GetLanAdapterName(int index, char *lanName)
 {
 	HANDLE   hMprConfig;
